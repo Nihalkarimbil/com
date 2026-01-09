@@ -17,7 +17,7 @@ function index() {
       <Route path='/cart' element={<Cart />} />
       <Route path='/wishlist' element={<Wishlist />} />
       <Route path='/checkout' element={<CheckoutPage />} />
-        <Route path="/product-details" element={<ProductDetails />} />
+      <Route path="/product-details" element={<ProductDetails />} />
       
     </Routes>
     </>

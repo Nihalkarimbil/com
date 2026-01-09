@@ -22,6 +22,7 @@ const ProductList = () => {
   const [selectedRating, setSelectedRating] = useState([]);
   const [selectedDiscount, setSelectedDiscount] = useState([]);
   const [selectedAvailability, setSelectedAvailability] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState("popular");
   const [productsPerPage] = useState(12);
   const [displayedProducts, setDisplayedProducts] = useState(12);
@@ -113,6 +114,9 @@ const ProductList = () => {
         selectedAvailability.some((a) =>
           a === "inStock" ? p.inStock : !p.inStock
         );
+      const searchMatch =
+        searchQuery === "" ||
+        p.name.toLowerCase().includes(searchQuery.toLowerCase());
 
       return (
         brandMatch &&
@@ -121,7 +125,8 @@ const ProductList = () => {
         colorMatch &&
         ratingMatch &&
         discountMatch &&
-        availabilityMatch
+        availabilityMatch &&
+        searchMatch
       );
     });
 
@@ -139,6 +144,7 @@ const ProductList = () => {
     selectedRating,
     selectedDiscount,
     selectedAvailability,
+    searchQuery,
     sortBy,
   ]);
 
@@ -273,8 +279,8 @@ const ProductList = () => {
             <label
               key={color.name}
               className={`flex items-center gap-2 p-1.5 rounded-lg border transition-all cursor-pointer ${selectedColors.includes(color.name)
-                  ? "border-indigo-600 bg-indigo-50"
-                  : "border-gray-100 hover:border-gray-200"
+                ? "border-indigo-600 bg-indigo-50"
+                : "border-gray-100 hover:border-gray-200"
                 }`}
             >
               <input
@@ -356,8 +362,8 @@ const ProductList = () => {
                 toggleFilter(val, setSelectedAvailability, selectedAvailability)
               }
               className={`px-3 py-1.5 rounded-full text-[10px] font-bold border transition-all ${selectedAvailability.includes(val)
-                  ? "bg-gray-900 text-white border-gray-900"
-                  : "bg-white text-gray-500 border-gray-200"
+                ? "bg-gray-900 text-white border-gray-900"
+                : "bg-white text-gray-500 border-gray-200"
                 }`}
             >
               {val === "inStock" ? "IN STOCK" : "OUT OF STOCK"}
@@ -369,7 +375,7 @@ const ProductList = () => {
   );
 
   return (
-    <div className="flex min-h-screen bg-white text-gray-900">
+    <div className="flex min-h-screen bg-white text-gray-900 mt-20">
       <aside className="hidden lg:block w-72 p-6 border-r border-gray-100 overflow-y-auto h-screen sticky top-0 no-scrollbar bg-white">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-xl font-black text-gray-800">Filters</h2>
@@ -429,7 +435,7 @@ const ProductList = () => {
         <FilterGroups />
       </Drawer>
 
-      <main className="flex-1 p-4 lg:p-8 bg-[#FAFAFA]">
+      <main className="flex-1 p-4 lg:p-8 bg-[#FAFAFA] pt-10 md:pt-1">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-start gap-4">
             <div>
@@ -442,6 +448,28 @@ const ProductList = () => {
               <h1 className="text-3xl lg:text-3xl font-black text-gray-900 tracking-tight leading-tight">
                 {state?.title || "Collection"}
               </h1>
+            </div>
+
+            {/* Search Bar */}
+            <div className="w-full md:flex-1 md:max-w-md mt-2 md:mt-0 md:mx-4">
+              <div className="relative group">
+                <input
+                  type="text"
+                  placeholder="Search products..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2.5 bg-white border border-gray-100 rounded-xl text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all shadow-sm group-hover:border-gray-300"
+                />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
+                {searchQuery && (
+                  <button
+                    onClick={() => setSearchQuery("")}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-300 hover:text-gray-500"
+                  >
+                    <X size={14} />
+                  </button>
+                )}
+              </div>
             </div>
 
             <div className="hidden lg:flex bg-white w-72 border border-gray-100 px-5 py-2.5 rounded-2xl text-sm text-gray-400 shadow-sm items-center gap-3">
@@ -461,7 +489,7 @@ const ProductList = () => {
             </div>
           </div>
 
-          <div className="flex flex-wrap gap-2 mb-6">
+          <div className="flex flex-wrap gap-2 mb-6 mt-3">
             {activeFilterCount > 0 && (
               <button
                 onClick={() => setIsFilterOpen(true)}

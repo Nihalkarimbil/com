@@ -81,7 +81,7 @@ const Wishlist = () => {
   };
 
   return (
-    <div className="max-w-7xl min-h-screen mx-auto py-5 px-4 sm:px-6 lg:px-8">
+    <div className="max-w-7xl min-h-screen mx-auto py-5 px-4 sm:px-6 lg:px-8 mt-18">
       <h1 className="text-2xl font-bold text-gray-900 mb-4">My Wishlist <span className='text-gray-500 text-lg font-normal'>({items.length} items)</span></h1>
 
       {/* Filter Tabs */}
