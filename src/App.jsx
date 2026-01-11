@@ -1,11 +1,11 @@
 
 import './App.css'
-import Router from './router/index.jsx'
+import Index from  "./router/Index.jsx"
 
 function App() {
   return (
     <>
-      <Router />
+      <Index />
     </>
   )
 }
