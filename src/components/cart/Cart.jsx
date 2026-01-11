@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Cart = () => {
-  // Mock data representing the cart state
   const [cartItems, setCartItems] = useState([
     {
       id: 1,
@@ -48,7 +47,6 @@ const Cart = () => {
   return (
     <div className="min-h-screen bg-white relative overflow-hidden  text-gray-800 mt-20">
 
-      {/* Decorative Background Blobs (Top Left & Top Right) */}
       <div className="absolute top-0 left-0 w-64 h-64 bg-pink-50 rounded-full mix-blend-multiply filter blur-xl opacity-70 -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
       <div className="absolute top-0 right-0 w-96 h-96 bg-pink-50 rounded-full mix-blend-multiply filter blur-xl opacity-70 translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
 
@@ -57,7 +55,6 @@ const Cart = () => {
 
         <div className="flex flex-col lg:flex-row gap-8">
 
-          {/* LEFT COLUMN: Cart Items */}
           <div className="flex-1">
             {cartItems.length > 0 ? (
               cartItems.map((item) => (
