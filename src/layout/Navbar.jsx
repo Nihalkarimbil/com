@@ -10,17 +10,12 @@ const PerfumeNavbar = () => {
 
   const navLinks = [
     { id: 1, name: "Home", path: "/" },
-    {
-      id: 2,
-      name: "Men",
-      path: "/list",
-      state: { id: 2, title: "Men", offer: null, type: "perfume" },
-    },
+
     {
       id: 3,
-      name: "Women",
+      name: "shop",
       path: "/list",
-      state: { id: 3, title: "Women", offer: null, type: "perfume" },
+      state: { id: 3, title: "All", offer: null, type: "fashion" },
     },
     { id: 4, name: "About", path: "/about" },
   ];
@@ -52,8 +47,8 @@ const PerfumeNavbar = () => {
     <>
       <nav
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b ${isScrolled
-            ? "bg-white/80 backdrop-blur-md border-gray-200 py-4 shadow-sm"
-            : "bg-white border-transparent py-5"
+          ? "bg-white/80 backdrop-blur-md border-gray-200 py-4 shadow-sm"
+          : "bg-white border-transparent py-5"
           }`}
       >
         <div className="px-6 lg:px-12 flex items-center justify-between">
@@ -74,8 +69,8 @@ const PerfumeNavbar = () => {
                   <button
                     onClick={() => handleNavigation(link.path, link.state)}
                     className={`text-sm font-medium tracking-wide transition-colors relative group ${location.pathname === link.path && !link.state
-                        ? "text-black"
-                        : "text-gray-500 hover:text-black"
+                      ? "text-black"
+                      : "text-gray-500 hover:text-black"
                       }`}
                   >
                     {link.name}
@@ -103,7 +98,13 @@ const PerfumeNavbar = () => {
 
           {/* RIGHT: Utility Icons */}
           <div className="flex-1 flex items-center justify-end gap-4 sm:gap-6">
-          
+            <button
+              onClick={() => navigate("/account")}
+              className="p-1 hover:text-gray-500 transition-colors relative"
+            >
+              <User className="w-5 h-5 text-gray-800" />
+            </button>
+
             <button
               onClick={() => navigate("/wishlist")}
               className="p-1 hover:text-gray-500 transition-colors relative"

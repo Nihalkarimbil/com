@@ -227,7 +227,7 @@ const ProductList = () => {
       </div>
       <div>
         <span className="text-[11px] font-black tracking-widest text-gray-400 uppercase block mb-1">
-          Subcategory
+          Category
         </span>
         <div className="space-y-2.5">
           {subcategories.map((cat) => (
